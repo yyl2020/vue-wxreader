@@ -1,13 +1,11 @@
 <template>
   <div id="app">
-    <span class="icon-add"></span>
-    <span class="font"> adsadasd</span>
     <router-view/>
   </div>
 </template>
 <script>
+
 export default {
-  
 }
 document.addEventListener('DOMContentLoaded', () => {
   const html = document.querySelector('html')
@@ -17,9 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 </script>
 <style lang='scss'>
-  @import "./assets/style/global.scss";
-  .font{
-    font-family: Days One;
-    font-size: px2rem(20);
+  #app{
+    width:100%;
+    height: 100%;
+    overflow: hidden;
   }
 </style>
