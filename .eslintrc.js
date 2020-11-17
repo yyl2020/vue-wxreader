@@ -19,6 +19,7 @@ module.exports = {
     'eol-last': 'off',
     'key-spacing': 'off',
     'space-before-function-paren': 'off',
-    'quote-props': 'off'
+    'quote-props': 'off',
+    'quotes': 'off'
   }
 }

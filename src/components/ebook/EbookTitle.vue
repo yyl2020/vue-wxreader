@@ -20,11 +20,9 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { ebookMinx } from '../../util/mixin'
 export default {
-    computed: {
-        ...mapGetters(['menuVisible'])
-    },
+    mixins:[ebookMinx],
     methods: {
         back() {
             console.log('back')
@@ -33,7 +31,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
 @import '../../assets/style/global.scss';
 .title-wrapper {
     position: absolute;

@@ -5,55 +5,63 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import Epub from 'epubjs'
+import { ebookMinx } from '../../util/mixin'
 global.ePub = Epub
 export default {
+  mixins:[ebookMinx],
   data() {
     return {
       startX: 0,
       startTime: 0,
-      redition: {}
+      rendition: {}
     }
-  },
-  computed: {
-    ...mapGetters(['fileName', 'menuVisible'])
   },
   mounted() {
     console.log(this.$route.params.fileName)
     const fileName = this.$route.params.fileName.split('|').join('/')
-    this.$store.dispatch('setFileName', fileName).then(() => {
+    this.setFileName(fileName).then(() => {
       this.initEpub()
     })
   },
   methods: {
     prevPage() {
-      if (this.redition) {
-        this.redition.prev()
+      if (this.rendition) {
+        this.rendition.prev()
+        this.hideTitleAndMenu()
       }
     },
     nextPage() {
-      if (this.redition) {
-        this.redition.next()
+      if (this.rendition) {
+        this.rendition.next()
+        this.hideTitleAndMenu()
       } 
     },
     toggleTitleAndMenu () {
-      this.$store.dispatch('setMenuVisible', !this.menuVisible)
+      if (this.menuVisible) {
+        this.setSettingVisible(-1)
+      }
+      this.setMenuVisible(!this.menuVisible)
+    },
+    hideTitleAndMenu () {
+      this.setSettingVisible(-1)
+      this.setMenuVisible(false)
     },
     initEpub() {
       const url = `http://121.199.52.159:8089/${this.fileName}.epub`
       this.book = new Epub(url)
-      this.redition = this.book.renderTo('read', {
+      this.rendition = this.book.renderTo('read', {
         width: innerWidth,
         height: innerHeight,
         methods: 'default'
       })
-      this.redition.display()
-      this.redition.on('touchstart', (event) => {
+      this.setCurrentBook(this.book)
+      this.rendition.display()
+      this.rendition.on('touchstart', (event) => {
         this.startX = event.changedTouches[0].clientX
         this.startTime = event.timeStamp
       })
-      this.redition.on('touchend', (event) => {
+      this.rendition.on('touchend', (event) => {
         const clientX = event.changedTouches[0].clientX - this.startX
         const time = event.timeStamp - this.startTime
         if (time < 500 && clientX > 40) {
