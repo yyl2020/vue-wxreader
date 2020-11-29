@@ -22,17 +22,20 @@
     </transition>
     <ebook-setting-font></ebook-setting-font>
     <ebook-font-family-popup></ebook-font-family-popup>
+    <ebook-setting-theme></ebook-setting-theme>
   </div>
 </template>
 
 <script>
 import { ebookMinx } from '../../util/mixin'
 import EbookSettingFont from './EbookSettingFont.vue'
+import EbookSettingTheme from './EbookSettingTheme.vue'
 import EbookFontFamilyPopup from './EbookFontFamilyPopup.vue'
 export default {
   components:{
     EbookSettingFont,
-    EbookFontFamilyPopup
+    EbookFontFamilyPopup,
+    EbookSettingTheme
   },
   mixins: [ebookMinx],
   methods: {

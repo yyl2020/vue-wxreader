@@ -1,4 +1,5 @@
 import { mapGetters, mapActions } from 'vuex'
+import { themeList } from './book'
 export const ebookMinx = {
     computed:{
         ...mapGetters([
@@ -22,7 +23,10 @@ export const ebookMinx = {
             'offsetY',
             'isBookmark',
             'speakingIconBottom'
-        ])
+        ]),
+        themeList() {
+            return themeList(this)
+        }
     },
     methods: {
         ...mapActions([
